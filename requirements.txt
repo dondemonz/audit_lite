@@ -1,0 +1,8 @@
+# по какой-то причине устанавливаются и другие плагины, например colorama,  more-itertools, atomicwrites может это зависимости от тех, что в списке??? они беруться из общего виртуального окружения
+# устанавливаются в shiningpanda
+pytest==3.10.1
+parse
+pluggy
+requests
+six
+allure-pytest
