@@ -1,7 +1,5 @@
 import psycopg2
 from psycopg2.extras import DictCursor
-from contextlib import closing
-from model.input_data import *
 
 
 class DbHelper:
