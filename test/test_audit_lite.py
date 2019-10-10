@@ -1,4 +1,3 @@
-from pywinauto.application import Application
 from fixture.work_with_db import DbHelper
 from datetime import timedelta
 import time
@@ -6,7 +5,6 @@ import datetime as dt
 from model.input_data import *
 
 
-import os
 keyword = 'SecurOS'
 path = "C:\\Program Files (x86)\\ISS\\SecurOS\\"
 
@@ -59,23 +57,3 @@ def test_clean_db(fix):
     db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
     db.clean_db()
     db.close_connection()
-
-
-
-
-
-
-""" не знаю откуда это и зачем
-def test2():
-    Application(backend="uia").start(path + "client.exe")
-    app = Application(backend="uia").connect(title='Панель управления SecurOS Enterprise')
-    dlg = app.window(title='Панель управления SecurOS Enterprise')
-    dlg.child_window(auto_id="MainPanelForm.gridLayoutWidget.MainPanelWidget.rightFrame.setupWidget.setupButton").click()
-    time.sleep(2)
-    dlg.ИнтеграцияиАвтоматизация.click_input()
-    l = dlg.button2.click_input()
-    # p = pywinauto.findwindows.find_elements(class_name="QAction")
-
-    p = l.child_window(class_name="QAction", top_level_only=False).exists()
-    print(p)
-"""

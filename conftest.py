@@ -2,8 +2,6 @@ from fixture.load_dll import DllHelper
 from model.input_data import *
 import pytest
 import time
-import os
-import shutil
 
 
 @pytest.fixture
