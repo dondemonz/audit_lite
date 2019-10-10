@@ -6,3 +6,4 @@ pluggy
 requests
 six
 allure-pytest
+psycopg2
