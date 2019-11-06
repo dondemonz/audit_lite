@@ -20,7 +20,7 @@ def test_setup(fix):
     db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
     assert db.records != []
     db.check_db_events(event_time=starttime)
-    time.sleep(1)
+    time.sleep(2)
     datetime = db.records[0][3]
     t = datetime.strftime("%Y-%m-%d %H:%M:%S")
     #проверка текущего времени и времени записанного в БД
