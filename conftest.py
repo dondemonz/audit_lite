@@ -26,6 +26,7 @@ def fix3(request):
         fix.send_event(message=("CORE||DELETE_OBJECT|objtype<GRABBER>,objid<" + camId + ">").encode("utf-8"))
         fix.send_event(message=("CORE||DELETE_OBJECT|objtype<GRABBER>,objid<" + camId2 + ">").encode("utf-8"))
         fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<0>").encode("utf-8"))
+        fix.disconnect()
         #print('\nSome resource fin')
     request.addfinalizer(fin)
     return request

@@ -19,6 +19,7 @@ def test_setup(fix):
     time.sleep(2)
     db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
     assert db.records != []
+    time.sleep(1)
     db.check_db_events(event_time=starttime)
     time.sleep(2)
     datetime = db.records[0][3]
