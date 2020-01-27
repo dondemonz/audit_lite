@@ -12,8 +12,10 @@ path = "C:\\Program Files (x86)\\ISS\\SecurOS\\"
 def test_setup(fix):
     m = dt.datetime.now() + timedelta(hours=1)
     starttime = m.strftime("%Y-%m-%d %H:%M:%S")
-    m2 = dt.datetime.now() + timedelta(hours=1, seconds=3)
+    m2 = dt.datetime.now() + timedelta(hours=1, seconds=2)
     starttime2 = m2.strftime("%Y-%m-%d %H:%M:%S")
+    m2 = dt.datetime.now() + timedelta(hours=1, seconds=3)
+    starttime3 = m2.strftime("%Y-%m-%d %H:%M:%S")
     fix.send_react(("MEDIA_CLIENT|1|ADD_SEQUENCE|mode<1x1>,seq<|"+camId+">").encode("UTF-8"))
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>").encode("utf-8"))
     time.sleep(2)
@@ -25,7 +27,7 @@ def test_setup(fix):
     datetimedb = db.records[0][3]
     t = datetimedb.strftime("%Y-%m-%d %H:%M:%S")
     #проверка текущего времени и времени записанного в БД
-    assert t == starttime or t == starttime2
+    assert t == starttime or t == starttime2 or t == starttime3
     event_id = db.records[0][0]
     print(event_id)
     db.check_db_objects(event_id=event_id)
