@@ -19,7 +19,8 @@ departmentId = "1.999"
 exportPath = "C:\\export\\"
 IdDB = "16394"  # id тестовой базы данных, названи таблицы image. В ней должно быть две колонки: 1-я image, 2-я id
 event_action = "24"
-
+keyword = 'SecurOS'
+path = "C:\\Program Files (x86)\\ISS\\SecurOS\\"
 
 tour_id = "0"  # Id настроенного тура
 preset_id = "1"  # Id настроенной препозиции

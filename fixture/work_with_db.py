@@ -18,7 +18,7 @@ class DbHelper:
             with conn.cursor(cursor_factory=DictCursor) as cursor:
                 cursor.execute("SELECT * FROM audit_events WHERE event_time >=%s and event_action = 24", (event_time,))
                 self.records = cursor.fetchall()
-                print("records", self.records)
+                #print("records", self.records)
         cursor.close()
         return conn
 

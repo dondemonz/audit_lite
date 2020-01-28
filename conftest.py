@@ -13,7 +13,7 @@ def fix(request):
     return fixture
 
 @pytest.fixture(scope="session", autouse=True)
-def fix3(request):
+def fix2(request):
     fix = DllHelper()
     #две камеры для тестов
     fix.send_event(message=("CORE||CREATE_OBJECT|objtype<GRABBER>,objid<" + camId + ">,parent_id<" + slave + ">,name<"+camName+">,type<Axis>,model<default>,format<H264>,ip<172.16.20.54>,user_name<root>,auth_crpt<LLGLBGFCECOAFKHN>").encode("utf-8"))  # type=Axis, т.к. без типа будет сильно грузиться система
