@@ -1,5 +1,6 @@
 from fixture.load_dll import DllHelper
 from model.input_data import *
+from fixture.work_with_db import *
 import pytest
 import time
 
@@ -27,6 +28,9 @@ def fix3(request):
         fix.send_event(message=("CORE||DELETE_OBJECT|objtype<GRABBER>,objid<" + camId2 + ">").encode("utf-8"))
         fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<0>").encode("utf-8"))
         fix.disconnect()
+        db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
+        db.clean_db()
+        db.close_connection()
         #print('\nSome resource fin')
     request.addfinalizer(fin)
     return request

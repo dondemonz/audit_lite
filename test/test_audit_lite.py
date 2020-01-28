@@ -57,8 +57,9 @@ def test2(fix):
     t3 = time_to.strftime("%Y-%m-%d %H:%M:%S")
     assert t1 <= t3 <= t2
 
-
+"""
 def test_clean_db(fix):
     db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
     db.clean_db()
     db.close_connection()
+"""
