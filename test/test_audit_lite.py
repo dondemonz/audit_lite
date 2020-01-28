@@ -9,7 +9,7 @@ def test_setup(fix):
     fix.send_react(("MEDIA_CLIENT|1|ADD_SEQUENCE|mode<1x1>,seq<|"+camId+">").encode("UTF-8"))
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>").encode("utf-8"))
     time.sleep(2)
-    db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
+    db = DbHelper()
     assert db.records != []
     time.sleep(1)
     db.check_db_events(event_time=starttime)
@@ -32,7 +32,7 @@ def test2(fix):
     t1 = take_datetime()
     time.sleep(61)
     t2 = take_datetime()
-    db = DbHelper(host="localhost", dbname="protocol", user="postgres", password="postgres")
+    db = DbHelper()
     db.check_db_events(event_time=t1)
     time.sleep(5)
     #print(db.records)

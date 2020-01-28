@@ -4,7 +4,7 @@ from psycopg2.extras import DictCursor
 
 class DbHelper:
 
-    def __init__(self, host=None, dbname=None, user=None, password=None, records=None):
+    def __init__(self, host="localhost", dbname="protocol", user="postgres", password="postgres", records=None):
         self.host = host
         self.dbname = dbname
         self.user = user

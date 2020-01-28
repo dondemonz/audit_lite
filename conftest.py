@@ -20,6 +20,7 @@ def fix2(request):
     fix.send_event(message=("CORE||CREATE_OBJECT|objtype<CAM>,objid<" + camId + ">,parent_id<" + camId + ">,name<"+camName+">").encode("utf-8"))
     fix.send_event(message=("CORE||CREATE_OBJECT|objtype<GRABBER>,objid<" + camId2 + ">,parent_id<" + slave + ">,name<"+camName2+">,type<Axis>,model<default>,format<H264>,ip<172.16.20.54>,user_name<root>,auth_crpt<LLGLBGFCECOAFKHN>").encode("utf-8"))  # type=Axis, т.к. без типа будет сильно грузиться система
     fix.send_event(message=("CORE||CREATE_OBJECT|objtype<CAM>,objid<" + camId2 + ">,parent_id<" + camId2 + ">,name<"+camName2+">").encode("utf-8"))
+    #db = DbHelper()
     time.sleep(5)
 
     #print('\nSome recource')
