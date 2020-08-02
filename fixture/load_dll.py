@@ -1,5 +1,6 @@
 from ctypes import windll, WINFUNCTYPE, c_int, c_char_p, c_ulong, c_uint32
 from model.input_data import *
+import time
 
 p1 = c_char_p(localHostIp.encode("utf-8"))
 p2 = c_char_p(iidkPort.encode("utf-8"))
@@ -41,6 +42,7 @@ class DllHelper:
     def connect(self):
         self.my_dll.ConnectEx.argtypes = [c_char_p, c_char_p, c_char_p, CallbackProto, c_uint32, c_int, c_uint32]
         self.my_dll.ConnectEx(p1, p2, p3, CallbackWrapper, p5, p6, p7)
+        time.sleep(1)
         """проверка isconected
         if x == 0:
             print("error")
@@ -70,6 +72,7 @@ class DllHelper:
         self.callback_proto()
         self.callback_wrapper()
         self.connect()
+        time.sleep(1)
 
 """
     def is_object_exist(self, obj_name, obj_id):
