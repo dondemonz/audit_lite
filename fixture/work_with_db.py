@@ -4,7 +4,7 @@ from psycopg2.extras import DictCursor
 
 class DbHelper:
 
-    def __init__(self, host="localhost", dbname="protocol", user="postgres", password="postgres", records=None):
+    def __init__(self, host="localhost", dbname=None, user="postgres", password="postgres", records=None):
         self.host = host
         self.dbname = dbname
         self.user = user
@@ -40,6 +40,15 @@ class DbHelper:
         cursor.close()
         return conn
 
+    def check_db_audit_interval(self, system_name):
+        with self.connection as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute('SELECT * FROM "OBJ_ARCHITECT" WHERE name =%s', (system_name,))
+                #cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema NOT IN ('information_schema','pg_catalog');")
+                self.records = cursor.fetchall()
+                #print("records", self.records)
+        cursor.close()
+        return conn
 
 #cursor.execute('SELECT * FROM audit_events WHERE event_action=%s', (event_action,))
     #CONVERT_TZ(created_at, '+00:00', '+08:00')   between     "2018-01-24" and "2018-01-25"

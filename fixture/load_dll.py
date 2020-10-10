@@ -2,9 +2,9 @@ from ctypes import windll, WINFUNCTYPE, c_int, c_char_p, c_ulong, c_uint32
 from model.input_data import *
 import time
 
-p1 = c_char_p(localHostIp.encode("utf-8"))
-p2 = c_char_p(iidkPort.encode("utf-8"))
-p3 = c_char_p(iidkId.encode("utf-8"))
+p1 = c_char_p(local_host_ip.encode("utf-8"))
+p2 = c_char_p(iidk_port.encode("utf-8"))
+p3 = c_char_p(iidk_id.encode("utf-8"))
 # message = c_char_p("CORE", "RANDOM", "CREATE_OBJECT", "objtype", "CAM", "objid", "999999", "parent_id", "2", "name", "Test Camera")
 p5 = 0
 p6 = 0
@@ -56,6 +56,7 @@ class DllHelper:
         msg = c_char_p(message)
         self.my_dll.SendDoReact.argtypes = [c_char_p, c_char_p]
         self.my_dll.SendDoReact(p3, msg)
+        self.disconnect()
 
     def send_event(self, message):
         self.connect_to_dll()
@@ -63,9 +64,10 @@ class DllHelper:
         msg = c_char_p(message)
         self.my_dll.SendMsg.argtypes = [c_char_p, c_char_p]
         self.my_dll.SendMsg(p3, msg)
+        self.disconnect()
 
     def disconnect(self):
-        self.my_dll.Disconnect(iidkId)
+        self.my_dll.Disconnect(iidk_id)
 
 
     def connect_to_dll(self):
