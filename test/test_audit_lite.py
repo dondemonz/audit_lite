@@ -40,12 +40,9 @@ def test_check_audit_interval_1_minute(fix):
     assert t1 <= t3 <= t2
 
 def test_check_audit_intervals_in_db(fix):
-    fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<5>").encode("utf-8"))
     db = DbHelper(dbname=db_securos)
-    db.check_db_audit_interval(system_name="Система")
-    assert db.records[0][11] == 5
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<10>").encode("utf-8"))
-    db.check_db_audit_interval(system_name="Система")
+    db.check_db_audit_interval(system_name="cистема")
     assert db.records[0][11] == 10
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<15>").encode("utf-8"))
     db.check_db_audit_interval(system_name="Система")
@@ -56,3 +53,16 @@ def test_check_audit_intervals_in_db(fix):
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<60>").encode("utf-8"))
     db.check_db_audit_interval(system_name="Система")
     assert db.records[0][11] == 60
+
+
+def test_check_audit_interval_5_minute(fix):
+    fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<5>").encode("utf-8"))
+    t1 = take_datetime()
+    time.sleep(303)
+    t2 = take_datetime()
+    db = DbHelper(dbname=db_protocol)
+    db.check_db_events(event_time=t1)
+    time.sleep(5)
+    print(db.records)
+    t3 = take_datetime_from_db_timeto(db)
+    assert t1 <= t3 <= t2
