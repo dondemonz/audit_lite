@@ -23,6 +23,7 @@ keyword = 'SecurOS'
 path = "C:\\Program Files (x86)\\ISS\\SecurOS\\"
 db_protocol = "protocol"
 db_securos = "securos"
+sys = 'система'
 
 tour_id = "0"  # Id настроенного тура
 preset_id = "1"  # Id настроенной препозиции

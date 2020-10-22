@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2.extras import DictCursor
+from model.input_data import *
 
 
 class DbHelper:
@@ -40,10 +41,10 @@ class DbHelper:
         cursor.close()
         return conn
 
-    def check_db_audit_interval(self, system_name):
+    def check_db_audit_interval(self):
         with self.connection as conn:
             with conn.cursor(cursor_factory=DictCursor) as cursor:
-                cursor.execute('SELECT * FROM "OBJ_ARCHITECT" WHERE name =%s', (system_name,))
+                cursor.execute('SELECT * FROM "OBJ_ARCHITECT" WHERE name =%s', (sys,))
                 #cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema NOT IN ('information_schema','pg_catalog');")
                 self.records = cursor.fetchall()
                 #print("records", self.records)

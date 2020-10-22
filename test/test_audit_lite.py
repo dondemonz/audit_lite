@@ -42,16 +42,16 @@ def test_check_audit_interval_1_minute(fix):
 def test_check_audit_intervals_in_db(fix):
     db = DbHelper(dbname=db_securos)
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<10>").encode("utf-8"))
-    db.check_db_audit_interval(system_name="cистема")
+    db.check_db_audit_interval()
     assert db.records[0][11] == 10
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<15>").encode("utf-8"))
-    db.check_db_audit_interval(system_name="Система")
+    db.check_db_audit_interval()
     assert db.records[0][11] == 15
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<30>").encode("utf-8"))
-    db.check_db_audit_interval(system_name="Система")
+    db.check_db_audit_interval()
     assert db.records[0][11] == 30
     fix.send_event(message=("CORE||UPDATE_OBJECT|objtype<ARCHITECT>,enable_audit<1>,audit_interval_minutes<60>").encode("utf-8"))
-    db.check_db_audit_interval(system_name="Система")
+    db.check_db_audit_interval()
     assert db.records[0][11] == 60
 
 
