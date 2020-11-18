@@ -51,6 +51,39 @@ class DbHelper:
         cursor.close()
         return conn
 
+    def check_db_audit_archive(self):
+        with self.connection as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute('SELECT * FROM audit_events WHERE comment =%s', (op_archive,))
+                #cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema NOT IN ('information_schema','pg_catalog');")
+                self.records = cursor.fetchall()
+                #print("records", self.records)
+                assert self.records != None
+                assert self.records != []
+        cursor.close()
+        return conn
+
+    def check_db_audit_longterm_archive(self):
+        with self.connection as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute('SELECT * FROM audit_events WHERE comment =%s', (long_archive,))
+                #cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema NOT IN ('information_schema','pg_catalog');")
+                self.records = cursor.fetchall()
+                #print("records", self.records)
+                assert self.records != None
+                assert self.records != []
+        cursor.close()
+        return conn
+
+    def check_db_intervals_for_video_archive(self):
+        with self.connection as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute("SELECT * FROM audit_intervals")
+                self.records = cursor.fetchall()
+                #print("records", self.records)
+        cursor.close()
+        return conn
+
 #cursor.execute('SELECT * FROM audit_events WHERE event_action=%s', (event_action,))
     #CONVERT_TZ(created_at, '+00:00', '+08:00')   between     "2018-01-24" and "2018-01-25"
 

@@ -1,9 +1,10 @@
+#отличается от load_dll только портом
 from ctypes import windll, WINFUNCTYPE, c_int, c_char_p, c_ulong, c_uint32
 from model.input_data import *
 import time
 
 p1 = c_char_p(local_host_ip.encode("utf-8"))
-p2 = c_char_p(iidk_port_core.encode("utf-8"))
+p2 = c_char_p(iidk_port_video.encode("utf-8"))
 p3 = c_char_p(iidk_id.encode("utf-8"))
 # message = c_char_p("CORE", "RANDOM", "CREATE_OBJECT", "objtype", "CAM", "objid", "999999", "parent_id", "2", "name", "Test Camera")
 p5 = 0
@@ -11,7 +12,7 @@ p6 = 0
 p7 = 0
 
 
-class DllHelper:
+class DllHelper_video_archive:
     def __init__(self, message=None, cb1=None, cb2=None, cb3=None, obj_name=None, obj_id=None):
         self.my_dll = windll.LoadLibrary("iidk.dll")
         self.ConnectEx = self.my_dll.ConnectEx
@@ -64,7 +65,13 @@ class DllHelper:
         msg = c_char_p(message)
         self.my_dll.SendMsg.argtypes = [c_char_p, c_char_p]
         self.my_dll.SendMsg(p3, msg)
-        self.disconnect()
+        #self.disconnect()
+
+    def send_event2(self, message):
+        # message = "CORE||CREATE_OBJECT|objtype<CAM>,objid<99>,parent_id<2>,name<Test_Camera>".encode("utf-8")
+        msg = c_char_p(message)
+        self.my_dll.SendMsg.argtypes = [c_char_p, c_char_p]
+        self.my_dll.SendMsg(p3, msg)
 
     def disconnect(self):
         self.my_dll.Disconnect(iidk_id)
